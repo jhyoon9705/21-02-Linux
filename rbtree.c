@@ -13,7 +13,7 @@ u64 end = 0;
 
 int rb_insert(struct rb_root* root, int count);
 void rb_search(struct rb_root* root, int count);
-void rb_delete(struct rb_root* tree, int count);
+void rb_delete(struct rb_root* root, int count);
 
 struct my_type {
   struct rb_node node;
@@ -91,9 +91,9 @@ void rb_delete(struct rb_root* tree, int count) {
   struct rb_node* node;
   
   start = ktime_get_ns();
-  for(node = rb_first(tree); node; node=rb_next(node)) {
+  for(node = rb_first(root); node; node=rb_next(node)) {
     data = rb_entry(node, struct my_type, node);
-    rb_erase(&data->node, tree);
+    rb_erase(&data->node, root);
     kfree(data);
   }
   end = ktime_get_ns();
